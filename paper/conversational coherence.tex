@@ -1,0 +1,183 @@
+\documentclass[12pt]{article}
+
+% This first part of the file is called the PREAMBLE. It includes
+% customizations and command definitions. The preamble is everything
+% between \documentclass and \begin{document}.
+
+\usepackage[margin=1in]{geometry}  % set the margins to 1in on all sides
+\usepackage{graphicx}              % to include figures
+\usepackage{amsmath}               % great math stuff
+\usepackage{amsfonts}              % for blackboard bold, etc
+\usepackage{amsthm}                % better theorem environments
+\usepackage{amssymb}               % symbols
+
+% various theorems, numbered by section
+
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{conj}[thm]{Conjecture}
+
+\DeclareMathOperator{\id}{id}
+
+\newcommand{\bd}[1]{\mathbf{#1}}  % for bolding symbols
+\newcommand{\RR}{\mathbb{R}}      % for Real numbers
+\newcommand{\ZZ}{\mathbb{Z}}      % for Integers
+\newcommand{\NN}{\mathbb{N}}      % for Naturals
+\newcommand{\QQ}{\mathbb{Q}}      % for Naturals
+\newcommand{\CC}{\mathbb{C}}      % for complex numbers
+\newcommand{\col}[1]{\left[\begin{matrix} #1 \end{matrix} \right]}
+\newcommand{\comb}[2]{\binom{#1^2 + #2^2}{#1+#2}}
+
+
+\begin{document}
+
+
+\nocite{*}
+
+\title{
+\textnormal{Some Results on Human Conversation \\(Assuming Bounded Rationality)}\\ 
+\small{Or, How One Mathematician Dutifully Fulfills the Stereotype of Being Woefully Socially Inept}}
+
+\author{Matt Hawthorn}
+\date{}
+\maketitle
+
+\section{Preliminaries}
+\paragraph*{}
+Let $\mathcal{H}$ be the set of all humans. 
+\paragraph*{•}
+Let $\mathcal{S}_L$ be the set of all well-formed (grammatical) statements of finite length in a given language $L$. These need not be single sentences or predicates, i.e. we assume that $\mathcal{S}_L$ is closed under concatenation.
+\paragraph*{•}
+Without further ambiguity, we refer to the unique empty statement as we would the empty set: $\emptyset$.  In what follows, unless otherwise specified, we will assume that any humans in question speak a common language $L$ and hence will write simply $\mathcal{S}$, rather than $\mathcal{S}_L$.\\
+
+We will now proceed by elaborating first the structure of individual humans, and then the structure of interactions between pairs of distinct humans.
+
+\subsection{Human comprehension and expression}
+For any $A\in\mathcal{H}$ who speaks the language $L$, we define the following:
+
+\begin{itemize}
+\item $\mathcal{M}_A$ is a nonempty set of semantic constructs (\textit{meanings}) internal to $A$.  $\mathcal{P}(\mathcal{M}_A)$ is the set of all subsets of $\mathcal{M_A}$ (the power set of $\mathcal{M}_A$.)  We say that ``$A$ inhabits mental universe $\mathcal{M}_A$,'' and for any $m\in\mathcal{M}_A$, we say that ``$A$ comprehends $m$.''
+
+\item $T_A:\mathcal{P}(\mathcal{M}_A)\rightarrow\mathcal{S}$ is the \textit{talking function of $A$ with respect to (w.r.t) $L$}.\\
+  For any $M\subseteq \mathcal{P}(\mathcal{M}_A)$, we say that ``$A$ says $T_A(m)\in\mathcal{S}$ to communicate the meanings in $M$.''  If $T_A$ is injective (one-to-one), we say that $A$ is \textit{fully expressive} w.r.t $L$.  When $A$ is not fully expressive, we may say that $A$ is \textit{reticent}.  If $T_A$ is surjective (its image is all of $\mathcal{S}$), we say that $A$ is \textit{hyperverbal} w.r.t $L$.
+
+\item $I_A:\mathcal{S}\rightarrow \mathcal{P}(\mathcal{M}_A)$ is the \textit{interpretation function of $A$ w.r.t. $L$}.\\
+  For any statement in $s\in\mathcal{S}$, we say that ``$A$ interprets statement $s$ as $I_A(s)\in\mathcal{P}(\mathcal{M}_A)$.''  If $I_A$ is injective, we say that $A$ is \textit{semantically nuanced} w.r.t. $L$.  When $A$ is not semantically nuanced, we say that ``$A$ is \textit{coarse}.''  If $I_A(s)\neq\emptyset$ for any $s\in\mathcal{S}$, we say that $A$ is \textit{hyperimaginative} w.r.t. $L$.
+
+\item If, for all $s\in range(T_A)$, $T_A(I_A(s))=s$, we say that ``$A$ speaks lucidly'' or simply ``$A$ is \textit{lucid}.''  If $A$ fails to be lucid, we may say that ``$A$ is \textit{muddled}.''
+If, for all $m\in range(I_A)$, $I_A(T_A(m))=m$, we say that ``$A$ interprets fairly'' or simply ``$A$ is \textit{fair}.''  Clearly, If $A$ is both lucid and fair, then $T_A$ and $I_A$ are both injective and vice-versa, which gives us the following:
+\begin{prop} 
+A human $A$ is both lucid and fair if and only if $A$ is both semantically nuanced and fully expressive.
+\end{prop}
+Most $A\in\mathcal{H}$ will not satisfy these rather strong conditions.  As an interesting aside, though, the Cantor-Schroeder-Bernstein Theorem tells us that, if $A$ is both lucid and fair, $|\mathcal{P}(\mathcal{M}_A)|=|\mathcal{S}_L|$, which is summed up in the following:
+\begin{prop}
+A human $A$ who is both lucid and fair (equivalently, semantically nuanced and fully expressive) in the language $L$ inhabits a mental universe $\mathcal{M}_A$ whose power set $|\mathcal{P}(\mathcal{M}_A)|$ is no smaller or larger, in the sense of cardinality, than the set of grammatical statements $\mathcal{S}_L$ of the language $L$.
+\end{prop}
+
+\item By the contrapositive it then follows that, if If $|\mathcal{P}(\mathcal{M}_A)|\neq |\mathcal{S}|$, $A$ is either not lucid or not fair.
+\begin{itemize}
+\item When $|\mathcal{P}(\mathcal{M}_A)|>|\mathcal{S}|$ then we say that ``$A$ is a \textit{mystic}.''  In particular, Cantor's Theorem ensures that any human for whom merely $|\mathcal{M}_A|=|\mathcal{S}|$ is a mystic, since it would then follow that $|\mathcal{P}(\mathcal{M}_A)|=|\mathcal{P}(\mathcal{S})|>|\mathcal{S}|$.  We have:
+\begin{prop}\label{geqmystics}
+If $|\mathcal{M}_A|\geq|\mathcal{S}|$, then $A$ is a mystic.
+\end{prop}
+
+In any case, when $A$ is a mystic, no injection from $\mathcal{P}(\mathcal{M}_A)$ to $\mathcal{S}$ will exist, and we thus have:
+\begin{prop}\label{mystics}
+Every mystic is reticent and unfair.
+\end{prop}
+\item It may occur however, that $|\mathcal{P}(\mathcal{M}_A)|>|\mathcal{S}|$ and yet $I_A$ only fails to be injective on the subset of $\mathcal{P}(\mathcal{M}_A)$ which $I_A$ maps to the empty statement $\emptyset$, i.e. $A$ is semantically nuanced on a subset $S$ of $\mathcal{P}(\mathcal{M}_A)$, and silent elsewhere.  In this case, we say that ``$A$ is \textit{Wittgensteinian} mystic.''  Here we may also say that ``whereof $A$ cannot speak, $A$ must remain silent.''
+\item When $|\mathcal{P}(\mathcal{M}_A)|<|\mathcal{S}|$, we say that $A$ is a \textit{simpleton}.  In particular, if $\mathcal{M}_A$ is finite, then so will be $\mathcal{P}(\mathcal{M}_A)$, and we will have $|\mathcal{P}(\mathcal{M}_A)|<|\mathcal{S}|$ (since the set $\mathcal{S}_L$, being closed under concatenation, is infinite.)  We have:
+\begin{prop}\label{finitesimpletons}
+If $\mathcal{M}_A$ is finite, then $A$ is a simpleton.
+\end{prop}
+In any case, the analogous statement to \ref{mystics} is:
+\begin{prop}\label{simpletons}
+Every simpleton is coarse and muddled.
+\end{prop}
+\end{itemize}
+\end{itemize}
+
+\subsection*{} We are now in a position to derive our first proper theorem:
+\begin{thm}\label{everyone}
+Every human is either a mystic or a simpleton with respect to a language $L$ whose vocabulary is finite.
+\end{thm}
+\begin{proof}
+As noted before, since $\mathcal{S}_L$ is closed under concatenation of statements, $\mathcal{S}_L$ is infinite.  Let $S\subseteq$ be the set of single sentences in $\mathcal{S}_L$, and let $V$ be the vocabulary of $L$, including punctuations.  Since every sentence is a finite string of words and punctuations from a finite vocaublary, \[S\subseteq\bigcup_{n=1}^{\infty}\otimes_{i=1}^{n}{V}\text{,}\]
+a countable union of finite sets.  So $S$ is at most countably finite.  Now, since every statement in $\mathcal{S}_L$ is a finite concatenation of sentences in $S$, \[\mathcal{S}_L=\bigcup_{n=1}^{\infty}\otimes_{i=1}^{n}{S}\text{.}\] 
+Since $S$ is at most countably infinite, $\otimes_{i=1}^{n}{S}$ is at most countably infinite.  So each set in the union is at most countably infinite.  Since a countable union of sets, each of which is at most countably infinite, is exactly countably infinite, we have that $\mathcal{S}_L$ is a countably infinite set.
+\paragraph*{}
+Now, suppose that $A$ has a finite set of semantic constructs $\mathcal{M}_A$.  By proposition \ref{finitesimpletons}, $A$ is a simpleton.\\
+Alternately, suppose that $A$ has an infinite set of semantic constructs, $\mathcal{M}_A$.  Since any infinite set is at least countably infinite, $|\mathcal{M}_A|\geq|\mathcal{S}|$, and by proposition \ref{geqmystics}, $A$ is a mystic.  So every human is either a simpleton or a mystic w.r.t $L$.
+\end{proof}
+An immediate corollary which follows from this theorem, together with propositions \ref{mystics} and \ref{simpletons}, is:
+\begin{cor}
+Every human speaking a language $L$ with a finite vocabulary is either coarse and muddled or reticent and unfair.
+\end{cor}
+
+\subsection{Human belief and quasireason}
+In addition to $\mathcal{M}_A$, $T_A$, and $I_A$, every human $A$ has some further internal structure:
+\begin{itemize}
+\item There is a \textit{quasirational structure} of $\mathcal{M}_A$:
+\begin{itemize}
+\item $I_A:\mathcal{P}(\mathcal{M}_A)\rightarrow\mathcal{P}(\mathcal{M}_A)$ is called the \textit{implication function of $A$}.  For any subset $M$ of $\mathcal{M}_A$, we say that ``$M$ implies $I_A(M)$ in the mind of $A$'' or simply ``$A$ concludes $I_A(M)$ from $M$.'' 
+\item $I_A$ always satisfies the following: $I_A(M\cup M')\supseteq I(M)\cup I(M')$ for all $M,M'\subseteq \mathcal{M}_A$.  If the inclusion is strict when $M=\emptyset$ ($I_A$ satisfies $I_A(\emptyset)\supset\emptyset$), then we say that $A$ is a \textit{budding existentialist}.
+
+\item $\mathcal{M}_A$ is closed under some binary and unary operations.  For any $m,m'\in \mathcal{M}_A$, $\neg m$, $m\vee m'$, $m\wedge m'$, $m\rightarrow m'$ are also in $\mathcal{M}_A$.  We may speak of these as if they had their usual logical meanings (``NOT $m$'', ``$m$ OR $m'$'', and ``$m$ AND $m'$'', ``$m$ IMPLIES $m'$'' respectively.), though they need not follow the laws of the Propositional Calculus in the mind of $A$, as elaborated below.
+
+\item We say that $A$ is \textit{well-educated} if $I_A$ respects the laws of some deductive system $P$ which is at least as powerful as, and consistent with, the Propositional Calculus; that is, for any $M\subseteq\mathcal{M}_A$, $I_A(M)\subseteq M^P$, where $M^P$ is the set of all statements implied by $M$ in the deductive system $P$, given that $\neg$, $\vee$, $\wedge$, and $\rightarrow$ have their usual meanings.
+\item if $A$ is well educated \textit{and} the inclusion $I_A(M)\subseteq M^P$ is an equality, that is $I_A(M)=M^P$ for all $M\in\mathcal{M}_A$, then we say that ``$A$ is \textit{a computer w.r.t. $P$}.''
+
+\item A subset $M$ of $\mathcal{M}_A$ is \textit{internally consistent w.r.t. $I_A$} if, for all $m\in I_A(M)$, $\neg m\notin I_A(M)$.
+\item We say that $A$ is \textit{totally incoherent} if the empty set is the only consistent subset within $M_A$ w.r.t. the implication function $I_A$.  Such pathological structure is a barrier to most interesting results; in what follows, unless otherwise specified, we will work within the subset of humans who are not totally incoherent.
+\end{itemize}
+
+\item There is a subset $\mathcal{B}_A\subseteq \mathcal{M}_A$ which we call the \textit{belief system} of $A$.  For any $b\in\mathcal{B}_A$, we say that ``$A$ holds $b$ to be true'' or simply ``$A$ believes $b$.''
+\begin{itemize}
+\item We say that $A$ is \textit{reasonable} if $\mathcal{B}_A$ is internally consistent w.r.t. $I_A$.
+\item We say that $A$ is \textit{thorough} if $\mathcal{B}_A=I_A(\mathcal{B}_A)$.
+\item We say that $A$ is \textit{a logician} if $A$ is well-educated, reasonable, and thorough.
+\item If $A$ is a logician and additionally $A$ is a computer, then we say that ``$A$ is \textit{essentially G\"odel}.''
+\end{itemize}
+\end{itemize}
+With these definitions in hand, we can deduce the following as immediate consequences:
+\begin{prop}
+No budding existentialist $A$ who believes nothing ($\mathcal{B}_A=\emptyset$) is thorough.
+\end{prop}
+\begin{proof}
+By definition of existentialist, the empty set has a nontrivial set of implications $I_A(\emptyset)$, i.e. $A$ concludes some $m\neq\emptyset$ from $\emptyset$, and $I_A(\mathcal{B}_A)\supset\emptyset$.  So $\mathcal{B}_A\neq I_A(\mathcal{B}_A)$ and $A$ is by definition not thorough.
+\end{proof}
+\begin{prop}
+Any totally incoherent person $A$ who is reasonable believes nothing ($\mathcal{B}_A=\emptyset$).
+\end{prop}
+\begin{proof}
+Since $A$ is reasonable, $\mathcal{B}_A$ is internally consistent.  By definition of total incoherence, the only internally consistent set of meanings in $A$'s semantic universe is $\emptyset$.  Thus, $\mathcal{B}_A=\emptyset$.
+\end{proof}
+
+\pagebreak
+\section{Conversations between 2 humans}
+\paragraph*{}
+A \textit{rant of length n} is a finite sequence $S$ of $n$ statements in $\mathcal{S}$.
+\paragraph*{•}
+An \textit{internal monologue of $A$ of length $k$} is a finite sequence $M_A$ of $k$ meanings in $\mathcal{M}_A$.
+\paragraph*{•}
+For any two distinct $A,B\in\mathcal{H}$ who speak a common language $L$, we define the following:
+\begin{itemize}
+\item A \textit{talk between $A$ and $B$ started by $A$} consists of an internal monologue $M_A=\left(a_1,a_2,\ldots\right)$of $A$ of length $i$ and an internal monologue  $M_B=\left(b_1,b_2,\ldots\right)$of $B$ of length either $i$ or $i-1$, together with a rant $S=\left( s_1,s_2,\ldots s_n\right)$ of length $n$ the sum of the lengths of the two internal monologues, such that $s_{2i-1}=T_A(a_i)$ and $s_{2i}=T_B(b_i)$ for all $i$.  When $|M_A|\neq |M_B|$, we say ``$S$ is ended by $A$'', and when $|M_A|=|M_B|=k$, we say ``$S$ is ended by $B$.''
+
+\item $\mathcal{T}(A,B)$ is the set of all talks between $A$ and $B$ ended by $B$.
+
+\item There is a function $R_A:\mathcal{T}(A,B)\rightarrow \mathcal{P}(\mathcal{M}_A)$ called the \textit{reply function of $A$}.
+\begin{itemize}
+\item If there are two talks $T_1=(M_A,M_B,S)$ and $T_2=(M_A,M'_B,S)$ in $\mathcal{T}(A,B)$, where $M_B\neq M'_B$, and such that $R_A(T_1)\neq R_A(T_2)$, then we say that ``$A$ is \textit{partially psychic}.''  In what follows, unless otherwise specified we will assume as an axiom that no human under consideration is partially psychic, i.e. that $R_A$ depends on a talk $T=(M_A,M_B,S)$ only through $M_A$ and $S$.
+\end{itemize}
+
+\item A \textit{conversation} $C\in\mathcal{T}(A,B)$ is a talk $(M_A=(a_1,a_2,\ldots),M_B=(b_1,b_2,\ldots),S=(s_1,s_2,\ldots))$ satisfying the following axioms:
+\begin{itemize}
+\item
+\end{itemize}
+\end{itemize}
+
+
+\end{document}
